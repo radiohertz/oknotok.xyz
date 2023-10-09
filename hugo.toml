@@ -1,0 +1,19 @@
+baseURL = 'https://evsky.art/'
+languageCode = 'en-us'
+title = "Evsky's blog"
+theme = 'paperesque'
+copyright = "© 2023 Evsky"
+
+[[params.topmenu]]
+  name = "blog"
+  url = "posts/"
+
+[[params.topmenu]]
+  name = "tags"
+  url = "tags/"
+
+#[[params.topmenu]]
+#  name = "about"
+#  url = "about/"
+
+
