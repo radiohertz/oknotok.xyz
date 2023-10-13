@@ -13,7 +13,7 @@ tags = ['rust', 'osx', 'macos', 'endpoint security']
 
 This is a short tutorial using Apple's [Endpoint Security](https://developer.apple.com/documentation/endpointsecurity) Framework in Rust to build security applications.
 
-We will build a small security application that sends a notification to the desktop everytime someone SSH's into a machine that is running the application. 
+We will build a small observability application that sends a notification to the desktop everytime someone SSH's into a machine that is running the application. 
 
 
 # What is Endpoint Security? 
@@ -21,17 +21,17 @@ We will build a small security application that sends a notification to the desk
 Endpoint Security is an Apple Framework to monitor system events for potentially suspicious activity. 
 
 Endpoint Security clients can listen to various events such as File System, Processes, Signals, etc. 
-You can check the official Apple documentation for a list of all events you can listen to.
+Check the official [Apple documentation](https://developer.apple.com/documentation/endpointsecurity/es_event_type_t) for a list of all events you can listen to.
 
 # The Program
 
-*techincal requirements*
+*technical requirements*
 
 - Rust compiler with version 1.65.0+
 - MacOS Version 13.0+
 
 **NOTE:**
-Since programs that use Endpoint Security are special, you have to disable something know as SIP. You can follow this [tutorial](https://support.intego.com/hc/en-us/articles/115003523252-How-to-Disable-System-Integrity-Protection-SIP-) which shows you how to do so.
+Since programs that use Endpoint Security are special, you have to disable [System Integrity Protection](https://support.intego.com/hc/en-us/articles/115003523252-How-to-Disable-System-Integrity-Protection-SIP-) to run unsigned ES applications. 
 
 Create a new project using cargo
 ```sh
@@ -40,7 +40,7 @@ cd ssh-notify
 ```
 
 We will be making use of the crates: 
-- [endpoint-sec](https://crates.io/endpoint-sec) : Rust bindings for the Endpoint Security C API.
+- [endpoint-sec](https://crates.io/crates/endpoint-sec) : Rust bindings for the Endpoint Security C API.
 - [notify-rust](https://crates.io/crates/notify-rust): Send notifications to the desktop.
 
 Add these deps to your `Cargo.toml`
@@ -205,7 +205,7 @@ Now you can wish to extend this however you want, the important thing is to have
 
 Right now, the way we are codesigning the app is not ready for production use. 
 
-Getting our endpoint security application production-ready is bit of a hassle as Apple requires we request for the entitlement. You can apply for the entitlement [here](https://developer.apple.com/contact/request/system-extension/).
+Getting our endpoint security application production-ready is bit of a hassle as Apple requires we request for the Endpoint Security entitlement. You can apply for the entitlement [here](https://developer.apple.com/contact/request/system-extension/).
 
 Once your developer account is approved for Endpoint Security entitlement, you can generate a provision profile with the entitlement enabled. You can then use the profile to sign your application.
 
