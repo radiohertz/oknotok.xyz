@@ -5,9 +5,11 @@ draft = false
 display_section = 'posts'
 +++
 
+![Lain](/lain.jpg)
+
 # Bio
 
-I intend to write about literature, art, music, theology and tech.
+I intend to write about theology, literature, art, and tech.
 
 ## Links
 
