@@ -20,8 +20,8 @@ We will build a small observability application that sends a notification to the
 
 Endpoint Security is an Apple Framework to monitor system events for potentially suspicious activity. 
 
-Endpoint Security clients can listen to various events such as File System, Processes, Signals, etc. 
-Check the official [Apple documentation](https://developer.apple.com/documentation/endpointsecurity/es_event_type_t) for a list of all events you can listen to.
+Endpoint Security clients can listen to various events, such as file system, processes, signals, etc. 
+Check the official [Apple documentation](https://developer.apple.com/documentation/endpointsecurity/es_event_type_t) for a list of all the events you can listen to.
 
 # The Program
 
@@ -72,7 +72,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-We first create a ES client and pass it a closure. The closure gets the client itself and the message as an argument. The message contains all the metadata of the event that has happened.
+We first create an ES client and pass it a closure. The closure gets the client itself and the message as an argument. The message contains all the metadata about the event that has happened.
 
 We then subscribe to the events `ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN` and `ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT` as we are listening for the SSH events.
 
@@ -91,11 +91,11 @@ let mut client = Client::new(|client, message| match message.event() {
 
 ```
 
-Since, we only care about SSH Login and Logout events; we match on those two events and log the event metadata to stdout.
+Since we only care about SSH login and logout events, we match those two events and log the event metadata to stdout.
 
 Now, we can run the program but before that we have to do some codesigning since it is necessary for an ES app.
 
-Create a file called `Extension.entitlements` and add these contents
+Create a file called `Extension.entitlements` and add these contents.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -118,7 +118,7 @@ idipot@mini ssh-notify % codesign --entitlements Extension.entitlements --force 
 
 ```
 
-We can finally run the program (don't forget to run the program as sudo). In a new terminal, SSH into your machine and you should see the events being logged
+We can finally run the program (don't forget to run the program as sudo). In a new terminal, SSH into your machine, and you should see the events being logged.
 
 ```console
 idipot@mini ssh-notify % sudo ./target/debug/ssh-notify
@@ -155,7 +155,7 @@ SSH Login: EventOpensshLogout {
 
 Yay, we got events!!!
 
-Now, instead of just logging the info to the events we'll update our message handler to send a notification to the desktop using the `notify-rust` crate.
+Now, instead of just logging the events we'll update our message handler to send a notification to the desktop using the `notify-rust` crate.
 
 ```rs
 let mut client = Client::new(|client, message| match message.event() {
@@ -190,7 +190,7 @@ let mut client = Client::new(|client, message| match message.event() {
 })?;
 ```
 
-You can rebuild the program, codesign it, run the program and try ssh-ing. You should see notifications everytime there is a ssh login and logout.
+You can rebuild the program, codesign it, run the program, and try ssh-ing. You should see notifications everytime there is a SSH login or logout.
 
 ![Login Notification](/es_rust1/login.png)
 
@@ -199,23 +199,23 @@ You can rebuild the program, codesign it, run the program and try ssh-ing. You s
 
 YAY, WE GET OUR NOTIFICATIONS!!!
 
-Now you can wish to extend this however you want, the important thing is to have fun and build security applications using the framework.
+Now you can wish to extend this however you want; the important thing is to have fun and build security applications using the framework.
 
 # Where to go from here?
 
 Right now, the way we are codesigning the app is not ready for production use. 
 
-Getting our endpoint security application production-ready is bit of a hassle as Apple requires we request for the Endpoint Security entitlement. You can apply for the entitlement [here](https://developer.apple.com/contact/request/system-extension/).
+Getting our endpoint security application production-ready is a bit of a hassle as Apple requires that we request for the Endpoint Security entitlement. You can apply for the entitlement [here](https://developer.apple.com/contact/request/system-extension/).
 
 Once your developer account is approved for Endpoint Security entitlement, you can generate a provision profile with the entitlement enabled. You can then use the profile to sign your application.
 
-This whole process is a bit scary and lacks documentation if you do not use xcode. I might do an another blog showing how to do all this in the future.
+This whole process is a bit scary and lacks documentation if you do not use xcode. I might do another blog showing how to do all this in the future.
 
 The Future blog will contain the following information:
 
 - Build an Endpoint Security daemon in Rust.
-- Generate Provision Profile for the Application. 
-- Sign the application using provision profile for distribution. 
+- Generate a Provision Profile for the Application. 
+- Sign the application using the provision profile for distribution. 
 
 
 Thank You.
