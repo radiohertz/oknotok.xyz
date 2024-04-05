@@ -216,7 +216,3 @@ The Future blog will contain the following information:
 - Build an Endpoint Security daemon in Rust.
 - Generate a Provision Profile for the Application. 
 - Sign the application using the provision profile for distribution. 
-
-
-Thank You.
-
