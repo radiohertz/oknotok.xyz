@@ -2,3 +2,6 @@
 	path = themes/paperesque
 	url = https://github.com/capnfabs/paperesque
 	branch = mainline
+[submodule "themes/holy"]
+	path = themes/holy
+	url = https://github.com/serkodev/holy

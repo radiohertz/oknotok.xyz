@@ -1,23 +1,17 @@
 baseURL = 'https://evsky.art/'
 languageCode = 'en-us'
-title = "Evsky's blog"
-theme = 'paperesque'
-copyright = "© 2023 Evsky"
+title = "OKNOTOK"
+theme = 'holy'
+copyright = "© 2023 OKNOTOK"
 staticDir = ['static']
 
 [markup.goldmark.renderer]
   unsafe = true # Allow HTML in md files
 
-[[params.topmenu]]
-  name = "blog"
-  url = "posts/"
-
-[[params.topmenu]]
-  name = "tags"
-  url = "tags/"
-
-#[[params.topmenu]]
-#  name = "about"
-#  url = "about/"
-
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 10
 
