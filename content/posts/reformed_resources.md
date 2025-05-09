@@ -1,7 +1,7 @@
 +++
 title = 'Resources on Reformed Theology'
 date = 2023-10-15T22:11:21+05:30
-draft = true
+draft = false
 tags = ['christian', 'theology', 'reformed']
 +++
 
